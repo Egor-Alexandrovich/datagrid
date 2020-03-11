@@ -1,12 +1,14 @@
 import React from 'react';
 import './app.css';
+import ScoreTable from '../score-table';
 
 
 const App = () => {
   return (
-    <div className="App">
-      APP
-    </div>
+    <main role='main' className="container">
+      <header className="header">Score Table</header>
+      <ScoreTable />
+    </main>
   );
 }
 

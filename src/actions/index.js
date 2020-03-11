@@ -1,10 +1,10 @@
-const dataLoaded = (newData) => {
+const dataSort = (dataId) => {
     return {
-        type: 'DATA_LOADED',
-        payload: newData,
+        type: 'DATA_SORT',
+        payload: dataId,
     }
 };
 
 export {
-    dataLoaded
+    dataSort
 }
