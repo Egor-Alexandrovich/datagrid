@@ -1,0 +1,12 @@
+.table .thead-light th.active {
+    background-color: #dee2e6;
+}
+.table .thead-light th {
+    text-transform: capitalize;
+}
+.fa-arrow-circle-o-down.active, .fa-arrow-circle-o-up.active {
+    color: red;
+}
+.fa-arrow-circle-o-up {
+    margin-right: 3px;
+}
