@@ -9,7 +9,8 @@ const MakedataFake = () => {
         score: faker.random.number({min:500, max: 1300})* -1 ,
         role: enumElement[faker.random.number({min:0, max: 4})],
         isActive: faker.random.boolean(),
-        date: faker.date.past().toLocaleString('ru', {year:'numeric', month: 'numeric', day: 'numeric'}),}
+        date: faker.date.past(),
+    }
 }
 let fakeInitialState = [...new Array(1100)].map(() => MakedataFake());
 function compare(a, b) {

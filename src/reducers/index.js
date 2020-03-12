@@ -9,7 +9,9 @@ const initialState = {
         {name: 'role', isSelected: false, isSortUp: false},
         {name: 'isActive', isSelected: false, isSortUp: false},
         {name: 'date', isSelected: false, isSortUp: false, isClickOn: true}
-    ]
+    ],
+    filter: false,
+    searchRequest: '',
 }
 const sortRow = ({data, selectedColum}, sortRow) => {
     const itemIndex = selectedColum.findIndex(({name}) => name === sortRow);
@@ -39,15 +41,26 @@ const selectColum = ({selectedColum}, sortColum) => {
         }
         return {name: element.name, isSelected: false, isSortUp: false, isClickOn: isClickOn};
     });
-    console.log(newArray);
     return newArray;
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'DATA_SORT' :
             return {
+                ...state,
                 data: sortRow(state, action.payload),
-                selectedColum: selectColum(state, action.payload)
+                selectedColum: selectColum(state, action.payload),
+            }
+        case 'FILTER_CHANGE' :
+            return {
+                ...state,
+                filter: !state.filter 
+            }
+        case 'SEARCH_FILTER' :
+            console.log(state);
+            return {
+                ...state,
+                searchRequest: action.payload, 
             }
         default: return state;
     }

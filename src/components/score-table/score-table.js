@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { dataSort } from '../../actions/index';
 import './score-table.css';
 
-const ScoreTable = ({data, selectedColum, onSort}) => {
+const ScoreTable = ({data, selectedColum, filter, searchRequest, onSort}) => {
     const renderRow = (item, idx) => {
         const { rank, name, email, score, role, isActive, date} = item;
         return (
@@ -14,7 +14,7 @@ const ScoreTable = ({data, selectedColum, onSort}) => {
                 <td>{score * -1 }</td>
                 <td>{role}</td>
                 <td>{isActive ? 'Yes' : 'No'}</td>
-                <td>{date}</td>
+                <td>{date.toLocaleString('ru', {year:'numeric', month: 'numeric', day: 'numeric'})}</td>
             </tr>
         )
       }
@@ -37,7 +37,22 @@ const ScoreTable = ({data, selectedColum, onSort}) => {
         return (
         <th key={name}>{name}</th>
         )
+    }
+    const isActiveFilter = (data, filter) => {
+      if(filter){ 
+        return data.filter((elem) => elem.isActive === true)
+      }
+      return data;
+    }
+    const mySearch = (data, term) => {
+      if (term.length === 0) {
+        return data;
+      }
+      return data.filter((item) => {
+        return item.name.toLowerCase().indexOf(term.toLowerCase()) > - 1;
+      });
     } 
+    const visibleItems = isActiveFilter(mySearch(data,searchRequest), filter);
     return (
         <table className="table table-hover">
           <thead className ="thead-light">
@@ -46,17 +61,19 @@ const ScoreTable = ({data, selectedColum, onSort}) => {
             </tr>
           </thead>
           <tbody>
-            {data.map(renderRow)}
+            {visibleItems.map(renderRow)}
           </tbody>
         </table>
         
     );
   };
   
-  const mapStateToProps = ({data, selectedColum}) => {
+  const mapStateToProps = ({data, selectedColum, filter, searchRequest}) => {
     return {
       data: data,
       selectedColum: selectedColum,
+      filter: filter,
+      searchRequest: searchRequest,
     }
   }
   const mapDispatchToProps =  {

@@ -4,7 +4,20 @@ const dataSort = (dataId) => {
         payload: dataId,
     }
 };
+const filterChange = () => {
+    return {
+        type: 'FILTER_CHANGE',
+    }
+}
+const searchFilter = (term) => {
+    return {
+        type: 'SEARCH_FILTER',
+        payload: term,
+    }
+}
 
 export {
-    dataSort
+    dataSort,
+    filterChange,
+    searchFilter,
 }

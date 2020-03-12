@@ -1,12 +1,13 @@
 import React from 'react';
 import './app.css';
 import ScoreTable from '../score-table';
+import Header from '../header';
 
 
 const App = () => {
   return (
     <main role='main' className="container">
-      <header className="header">Score Table</header>
+      <Header />
       <ScoreTable />
     </main>
   );
