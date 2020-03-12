@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { dataSort } from '../../actions/index';
+import SelectRole from '../select-role';
 import './score-table.css';
 
-const ScoreTable = ({data, selectedColum, filter, searchRequest, onSort}) => {
+const ScoreTable = ({data, selectedColum, filter, searchRequest, selectFilter, onSort}) => {
     const renderRow = (item, idx) => {
         const { rank, name, email, score, role, isActive, date} = item;
         return (
@@ -35,7 +36,7 @@ const ScoreTable = ({data, selectedColum, filter, searchRequest, onSort}) => {
             )
         }
         return (
-        <th key={name}>{name}</th>
+          name === 'role' ? <th key={name}><SelectRole /></th> : <th key={name}>{name}</th>
         )
     }
     const isActiveFilter = (data, filter) => {
@@ -44,15 +45,26 @@ const ScoreTable = ({data, selectedColum, filter, searchRequest, onSort}) => {
       }
       return data;
     }
+    const selectedFilter = (data, filter) => {
+      if(filter.length !==0){ 
+        const arrSearchValue = filter.map((elem) => elem.value)
+        // eslint-disable-next-line array-callback-return
+        return data.filter((elem) => {
+          if(arrSearchValue.some((element) => element === elem.role)){ return elem }
+        });
+      }
+      return data;
+    }
     const mySearch = (data, term) => {
       if (term.length === 0) {
         return data;
       }
       return data.filter((item) => {
-        return item.name.toLowerCase().indexOf(term.toLowerCase()) > - 1;
+        return item.name.toLowerCase().indexOf(term.toLowerCase()) > - 1 || item.email.toLowerCase().indexOf(term.toLowerCase()) > - 1;
       });
-    } 
-    const visibleItems = isActiveFilter(mySearch(data,searchRequest), filter);
+    }
+    // const visibleItems = isActiveFilter(mySearch(data,searchRequest), filter);
+    const visibleItems = selectedFilter((isActiveFilter(mySearch(data,searchRequest), filter)), selectFilter );
     return (
         <table className="table table-hover">
           <thead className ="thead-light">
@@ -68,12 +80,13 @@ const ScoreTable = ({data, selectedColum, filter, searchRequest, onSort}) => {
     );
   };
   
-  const mapStateToProps = ({data, selectedColum, filter, searchRequest}) => {
+  const mapStateToProps = ({data, selectedColum, filter, searchRequest, selectFilter}) => {
     return {
       data: data,
       selectedColum: selectedColum,
       filter: filter,
       searchRequest: searchRequest,
+      selectFilter: selectFilter,
     }
   }
   const mapDispatchToProps =  {

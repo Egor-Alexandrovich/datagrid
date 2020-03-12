@@ -3,6 +3,8 @@
 }
 .table .thead-light th {
     text-transform: capitalize;
+    min-width: 100px;
+    vertical-align: middle;
 }
 .fa-arrow-circle-o-down.active, .fa-arrow-circle-o-up.active {
     color: red;

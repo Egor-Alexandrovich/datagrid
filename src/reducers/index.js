@@ -12,6 +12,7 @@ const initialState = {
     ],
     filter: false,
     searchRequest: '',
+    selectFilter: [],
 }
 const sortRow = ({data, selectedColum}, sortRow) => {
     const itemIndex = selectedColum.findIndex(({name}) => name === sortRow);
@@ -57,10 +58,14 @@ const reducer = (state = initialState, action) => {
                 filter: !state.filter 
             }
         case 'SEARCH_FILTER' :
-            console.log(state);
             return {
                 ...state,
                 searchRequest: action.payload, 
+            }
+        case 'SELECT_FILTER' :
+            return {
+                ...state,
+                selectFilter: action.payload, 
             }
         default: return state;
     }

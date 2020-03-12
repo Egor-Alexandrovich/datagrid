@@ -15,9 +15,15 @@ const searchFilter = (term) => {
         payload: term,
     }
 }
-
+const selectFilter = (term) => {
+    return {
+        type: 'SELECT_FILTER',
+        payload: term,
+    }
+}
 export {
     dataSort,
     filterChange,
     searchFilter,
+    selectFilter,
 }

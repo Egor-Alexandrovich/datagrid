@@ -4,6 +4,7 @@ import './header.css'
 import ActiveFilter from '../active-filter';
 import SearchPanel from '../search-panel';
 
+
 const Header = () => {
     return (
         <header className="header">
