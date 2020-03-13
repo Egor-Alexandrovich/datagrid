@@ -6,7 +6,7 @@ import Header from '../header';
 
 const App = () => {
   return (
-    <main role='main' className="container">
+    <main role='main' className="container-lg">
       <Header />
       <ScoreTable />
     </main>

@@ -2,13 +2,13 @@ import fakeInitialState from '../fake-data/fake-data';
 const initialState = {
     data: fakeInitialState,
     selectedColum: [
-        {name: 'rank', isSelected: false, isSortUp: false, isClickOn: true},
-        {name: 'name', isSelected: false, isSortUp: false, isClickOn: true},
-        {name: 'email', isSelected: false, isSortUp: false},
-        {name: 'score', isSelected: false, isSortUp: false, isClickOn: true},
-        {name: 'role', isSelected: false, isSortUp: false},
-        {name: 'isActive', isSelected: false, isSortUp: false},
-        {name: 'date', isSelected: false, isSortUp: false, isClickOn: true}
+        {name: 'rank', isSelected: false, isSortUp: false, isClickOn: true, classTh:'col-1', label: 'Rank'},
+        {name: 'name', isSelected: false, isSortUp: false, isClickOn: true, classTh:'col-2', label: 'name'},
+        {name: 'email', isSelected: false, isSortUp: false, classTh:'col-3', label: 'email'},
+        {name: 'score', isSelected: false, isSortUp: false, isClickOn: true, classTh:'col-1', label: 'score'},
+        {name: 'role', isSelected: false, isSortUp: false, classTh:'col-2', label: ''},
+        {name: 'isActive', isSelected: false, isSortUp: false, classTh:'col-1', label: 'Active'},
+        {name: 'date', isSelected: false, isSortUp: false, isClickOn: true, classTh:'col-2', label: 'date'}
     ],
     filter: false,
     searchRequest: '',
@@ -36,11 +36,11 @@ const sortRow = ({data, selectedColum}, sortRow) => {
 }
 const selectColum = ({selectedColum}, sortColum) => {
     const newArray = selectedColum.map((element) => {
-        const { isSortUp, isClickOn } = element;
+        const { isSortUp, isClickOn, label, classTh } = element;
         if(element.name === sortColum) {
-            return { name: sortColum, isSelected: true, isSortUp: !isSortUp, isClickOn: isClickOn}
+            return { name: sortColum, isSelected: true, isSortUp: !isSortUp, isClickOn: isClickOn, label: label, classTh:classTh}
         }
-        return {name: element.name, isSelected: false, isSortUp: false, isClickOn: isClickOn};
+        return {name: element.name, isSelected: false, isSortUp: false, isClickOn: isClickOn, label: label, classTh:classTh };
     });
     return newArray;
 }

@@ -2,41 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { dataSort } from '../../actions/index';
 import SelectRole from '../select-role';
+import ReactWindowComponent from '../react-window-component';
 import './score-table.css';
 
 const ScoreTable = ({data, selectedColum, filter, searchRequest, selectFilter, onSort}) => {
-    const renderRow = (item, idx) => {
-        const { rank, name, email, score, role, isActive, date} = item;
-        return (
-            <tr key={idx}>
-                <td>{rank}</td>
-                <td>{name}</td>
-                <td>{email}</td>
-                <td>{score * -1 }</td>
-                <td>{role}</td>
-                <td>{isActive ? 'Yes' : 'No'}</td>
-                <td>{date.toLocaleString('ru', {year:'numeric', month: 'numeric', day: 'numeric'})}</td>
-            </tr>
-        )
-      }
+
     const renderThead = (item) => {
-        const {name, isSelected, isSortUp, isClickOn = false} = item;
+        const {name, isSelected, isSortUp, isClickOn = false, label, classTh} = item;
         let isSortDown = false;
+        const classCol = classTh + ' table-header__item';
         if(isSelected === true && isSortUp === false) {isSortDown = true}
         if(isClickOn) {
         return (
-            <th key={name}
+            <div key={name}
                 onClick = {() => onSort(name)}
-                className = {isSelected ? "active" : null}
+                className = {isSelected ? `${classCol} active` : classCol}
                 >
-                {name}
-                <i className={`fa fa-arrow-circle-o-down ${isSortDown ? "active" : null } float-right`} />
-                <i className={`fa fa-arrow-circle-o-up ${isSortUp ? "active" : null }  float-right`} />
-            </th>
+                {label}
+                <i className={`fa fa-arrow-circle-o-down ${isSortDown ? "active" : null }`} />
+                <i className={`fa fa-arrow-circle-o-up ${isSortUp ? "active" : null }`} />
+            </div>
             )
         }
         return (
-          name === 'role' ? <th key={name}><SelectRole /></th> : <th key={name}>{name}</th>
+          name === 'role' ? <div key={name} className = {classCol}><SelectRole /></div> : <div key={name} className = {classCol}>{label}</div>
         )
     }
     const isActiveFilter = (data, filter) => {
@@ -63,20 +52,17 @@ const ScoreTable = ({data, selectedColum, filter, searchRequest, selectFilter, o
         return item.name.toLowerCase().indexOf(term.toLowerCase()) > - 1 || item.email.toLowerCase().indexOf(term.toLowerCase()) > - 1;
       });
     }
-    // const visibleItems = isActiveFilter(mySearch(data,searchRequest), filter);
     const visibleItems = selectedFilter((isActiveFilter(mySearch(data,searchRequest), filter)), selectFilter );
+    // console.log(visibleItems);
     return (
-        <table className="table table-hover">
-          <thead className ="thead-light">
-            <tr>
-              {selectedColum.map(renderThead)}
-            </tr>
-          </thead>
-          <tbody>
-            {visibleItems.map(renderRow)}
-          </tbody>
-        </table>
-        
+      <div className ="container-lg score-table">
+        <div className ="row table-header">
+          {selectedColum.map(renderThead)}
+        </div>
+        <div className ="row table-row__container">
+        { visibleItems.length !== 0 ? <ReactWindowComponent visibleItems = { visibleItems }/> : null }
+        </div>
+      </div>
     );
   };
   
@@ -95,3 +81,19 @@ const ScoreTable = ({data, selectedColum, filter, searchRequest, selectFilter, o
 }
 
   export default connect(mapStateToProps, mapDispatchToProps)(ScoreTable);
+
+
+
+
+
+
+{/* <div className ="row table-header">
+          <div className= "col-1 table-header__item">rank</div>
+          <div className= "col-2 table-header__item">name</div>
+          <div className= "col-3 table-header__item">email</div>
+          <div className= "col-1 table-header__item">score</div>
+          <div className= "col-2 table-header__item">role</div>
+          <div className= "col-1 table-header__item">isActive</div>
+          <div className= "col-2 table-header__item">date</div>
+          
+        </div> */}
