@@ -5,7 +5,7 @@ import './delete-button.css'
 
 const DeleteButton = ({selectedRow, onDeleteItems}) => {
     return (
-        <div className="row">
+        <div className="col-3">
             <button 
                 className="btn btn-secondary btn-custom"
                 onClick = { onDeleteItems }

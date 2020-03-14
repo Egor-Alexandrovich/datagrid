@@ -15,6 +15,7 @@ const initialState = {
     searchRequest: '',
     selectFilter: [],
     selectedRow: new Set(),
+    visibleColumn: new Set(['rank','name', 'email', 'score', 'role', 'isActive', 'date'])
 }
 const sortRow = ({data, selectedColum}, sortRow) => {
     const itemIndex = selectedColum.findIndex(({name}) => name === sortRow);
@@ -47,8 +48,7 @@ const selectColum = ({selectedColum}, sortColum) => {
     return newArray;
 }
 const selectRow = ({selectedRow}, event, rank) => {
-    event.preventDefault();
-    if(event.shiftKey){
+    if(event){
         const newSetRow = new Set([...selectedRow])
         return newSetRow.add(rank);
     }
@@ -93,6 +93,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectFilter: action.payload, 
+            }
+        case 'ADD_DELETE_COLUMN' :
+            return {
+                ...state,
+                visibleColumn: new Set(action.payload) 
             }
         case 'SELECT_ROW' :
             return {

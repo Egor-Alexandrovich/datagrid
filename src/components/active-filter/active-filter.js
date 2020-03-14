@@ -15,12 +15,4 @@ const ActiveFilter = ({onFilterChange, id}) => {
         </div>
     )
 }
-// const mapStateToProps = ({filter}) => {
-//     return {
-//         filter: filter,
-//     }
-//   }
-//   const mapDispatchToProps =  {
-//     onFilterChange: filterChange,
-// }
 export default ActiveFilter;

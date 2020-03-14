@@ -15,7 +15,7 @@ const options = [
 
 class SelectRole extends Component {
 state = {
-    selectedOption: null,
+    selectedOption: [],
     }
 handleChange = (selectedOption) => {
     this.setState({ selectedOption });

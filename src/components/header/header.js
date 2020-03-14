@@ -6,6 +6,7 @@ import './header.css'
 import ActiveFilter from '../active-filter';
 import SearchPanel from '../search-panel';
 import DeleteButton from '../delete-button';
+import SelectColumn from '../select-column';
 
 const Header = ({onActiveFilterChange, onVirtualizationFilter, virtualization}) => {
     return (
@@ -26,7 +27,10 @@ const Header = ({onActiveFilterChange, onVirtualizationFilter, virtualization}) 
                     <SearchPanel />
                 </div>
             </div>
+            <div className="row align-items-center">
+            <SelectColumn />
             <DeleteButton />
+            </div>
         </header>
     );
 }

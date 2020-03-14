@@ -15,6 +15,12 @@ const searchFilter = (term) => {
         payload: term,
     }
 }
+const AddDeleteColumn = (selectedOption) => {
+    return {
+        type: 'ADD_DELETE_COLUMN',
+        payload: selectedOption,
+    }
+}
 const selectFilter = (term) => {
     return {
         type: 'SELECT_FILTER',
@@ -46,4 +52,5 @@ export {
     selectRow,
     deleteItems,
     virtualizationFilter,
+    AddDeleteColumn,
 }
