@@ -5,8 +5,7 @@ import SelectRole from '../select-role';
 import ReactWindowComponent from '../react-window-component';
 import './score-table.css';
 
-const ScoreTable = ({data, selectedColum, filter, searchRequest, selectFilter, onSort}) => {
-
+const ScoreTable = ({data, selectedColum, filter, searchRequest, selectFilter, virtualization, onSort}) => {
     const renderThead = (item) => {
         const {name, isSelected, isSortUp, isClickOn = false, label, classTh} = item;
         let isSortDown = false;
@@ -54,25 +53,27 @@ const ScoreTable = ({data, selectedColum, filter, searchRequest, selectFilter, o
     }
     const visibleItems = selectedFilter((isActiveFilter(mySearch(data,searchRequest), filter)), selectFilter );
     // console.log(visibleItems);
+    
     return (
       <div className ="container-lg score-table">
         <div className ="row table-header">
           {selectedColum.map(renderThead)}
         </div>
-        <div className ="row table-row__container">
+        <div className ={`row ${virtualization ? 'table-row__container': ''}`}>
         { visibleItems.length !== 0 ? <ReactWindowComponent visibleItems = { visibleItems }/> : null }
         </div>
       </div>
     );
   };
   
-  const mapStateToProps = ({data, selectedColum, filter, searchRequest, selectFilter}) => {
+  const mapStateToProps = ({data, selectedColum, filter, searchRequest, selectFilter, virtualization}) => {
     return {
       data: data,
       selectedColum: selectedColum,
       filter: filter,
       searchRequest: searchRequest,
       selectFilter: selectFilter,
+      virtualization: virtualization,
     }
   }
   const mapDispatchToProps =  {

@@ -51,8 +51,6 @@
 }
 .table-row {
     font-size: 0.7rem;
-    padding-left: 5px;
-    padding-right: 5px;
     text-transform: capitalize;
     vertical-align: middle;
     color: #212529;
@@ -64,7 +62,35 @@
     padding-right: 0;
     
 }
+.table-row-novirt {
+    font-size: 0.7rem;
+    text-transform: capitalize;
+    vertical-align: middle;
+    color: #212529;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+.table-row-novirt__item {
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: 35px;
+}
 .table-row__item {
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
     padding-left: 15px;
     padding-right: 0;
 }

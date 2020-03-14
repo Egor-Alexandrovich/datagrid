@@ -33,6 +33,11 @@ const deleteItems = () => {
         type: 'DELETE_SELECT_ROW',
     }
 }
+const virtualizationFilter = () => {
+    return {
+        type: 'VIRTUALIZATION_CHANGE',
+    }
+}
 export {
     dataSort,
     filterChange,
@@ -40,4 +45,5 @@ export {
     selectFilter,
     selectRow,
     deleteItems,
+    virtualizationFilter,
 }

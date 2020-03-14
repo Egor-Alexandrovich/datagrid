@@ -11,6 +11,7 @@ const initialState = {
         {name: 'date', isSelected: false, isSortUp: false, isClickOn: true, classTh:'col-2', label: 'date'}
     ],
     filter: false,
+    virtualization: false,
     searchRequest: '',
     selectFilter: [],
     selectedRow: new Set(),
@@ -46,7 +47,8 @@ const selectColum = ({selectedColum}, sortColum) => {
     return newArray;
 }
 const selectRow = ({selectedRow}, event, rank) => {
-    if(event){
+    event.preventDefault();
+    if(event.shiftKey){
         const newSetRow = new Set([...selectedRow])
         return newSetRow.add(rank);
     }
@@ -76,6 +78,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 filter: !state.filter 
+            }
+        case 'VIRTUALIZATION_CHANGE' :
+            return {
+                ...state,
+                virtualization: !state.virtualization 
             }
         case 'SEARCH_FILTER' :
             return {

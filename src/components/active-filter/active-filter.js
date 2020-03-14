@@ -1,26 +1,26 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { filterChange } from '../../actions/index';
+// import { connect } from 'react-redux';
+// import { filterChange } from '../../actions/index';
 import './active-filter.css';
 
-const ActiveFilter = ({filter, onFilterChange}) => {
+const ActiveFilter = ({onFilterChange, id}) => {
     return (
         <div className="custom-control custom-switch">
             <input 
             onClick ={ onFilterChange }
-            type="checkbox" className="custom-control-input" id="customSwitches"/>
+            type="checkbox" className="custom-control-input" id={`customSwitches${id}`}/>
             <label 
-                className="custom-control-label" htmlFor="customSwitches">
+                className="custom-control-label" htmlFor={`customSwitches${id}`}>
             </label>
         </div>
     )
 }
-const mapStateToProps = ({filter}) => {
-    return {
-        filter: filter,
-    }
-  }
-  const mapDispatchToProps =  {
-    onFilterChange: filterChange,
-}
-export default connect(mapStateToProps, mapDispatchToProps ) (ActiveFilter);
+// const mapStateToProps = ({filter}) => {
+//     return {
+//         filter: filter,
+//     }
+//   }
+//   const mapDispatchToProps =  {
+//     onFilterChange: filterChange,
+// }
+export default ActiveFilter;
