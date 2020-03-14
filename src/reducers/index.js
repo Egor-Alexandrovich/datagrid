@@ -13,6 +13,7 @@ const initialState = {
     filter: false,
     searchRequest: '',
     selectFilter: [],
+    selectedRow: new Set(),
 }
 const sortRow = ({data, selectedColum}, sortRow) => {
     const itemIndex = selectedColum.findIndex(({name}) => name === sortRow);
@@ -44,6 +45,25 @@ const selectColum = ({selectedColum}, sortColum) => {
     });
     return newArray;
 }
+const selectRow = ({selectedRow}, event, rank) => {
+    if(event){
+        const newSetRow = new Set([...selectedRow])
+        return newSetRow.add(rank);
+    }
+    const newSetRow = new Set([rank]);
+    return newSetRow;
+}
+const deleteSelectItems = ({ data, selectedRow }) => {
+     let resultArray = data;
+     [...selectedRow].forEach((element) => {
+        const itemIndex = resultArray.findIndex(({rank}) => rank === element);
+        resultArray = [
+            ...resultArray.slice(0, itemIndex),
+            ...resultArray.slice(itemIndex +1),
+        ]
+     });
+     return resultArray;
+}
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'DATA_SORT' :
@@ -67,6 +87,17 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 selectFilter: action.payload, 
             }
+        case 'SELECT_ROW' :
+            return {
+                ...state,
+                selectedRow: selectRow(state, action.event, action.payload), 
+            }
+        case 'DELETE_SELECT_ROW':
+            return {
+                ...state,
+                data: deleteSelectItems(state),
+                selectedRow: new Set(),
+            }    
         default: return state;
     }
     

@@ -21,9 +21,23 @@ const selectFilter = (term) => {
         payload: term,
     }
 }
+const selectRow = (event, rank) => {
+    return {
+        type: 'SELECT_ROW',
+        payload: rank,
+        event: event
+    }
+}
+const deleteItems = () => {
+    return {
+        type: 'DELETE_SELECT_ROW',
+    }
+}
 export {
     dataSort,
     filterChange,
     searchFilter,
     selectFilter,
+    selectRow,
+    deleteItems,
 }
