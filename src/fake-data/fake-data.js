@@ -12,7 +12,7 @@ const MakedataFake = () => {
         date: faker.date.past(),
     }
 }
-let fakeInitialState = [...new Array(1100)].map(() => MakedataFake());
+let fakeInitialState = [...new Array(3000)].map(() => MakedataFake());
 function compare(a, b) {
       if (a.score < b.score) return -1;
       if (a.score > b.score) return 1;
