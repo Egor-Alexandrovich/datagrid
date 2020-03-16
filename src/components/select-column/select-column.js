@@ -21,7 +21,6 @@ state = {
     }
 handleChange = (selectedOption) => {
     this.setState({ selectedOption });
-    console.log(selectedOption);
     let result = [];
     if(selectedOption !== null) {
       result = selectedOption.map((elem) => elem.value)
